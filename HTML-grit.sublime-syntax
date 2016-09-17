@@ -1,0 +1,45 @@
+%YAML 1.2
+---
+name: HTML (+Grit)
+file_extensions:
+  - html
+  - htm
+  - shtml
+  - xhtml
+  - inc
+  - tmpl
+  - tpl
+first_line_match: (?i)<(!DOCTYPE\s*)?html
+scope: text.html.basic.grit
+
+contexts:
+  main:
+    - match: ''
+      push: Packages/HTML/HTML.sublime-syntax
+      with_prototype:
+        - include: disabled-preprocessor-block
+        - include: enabled-preprocessor-block
+
+  disabled-preprocessor-block:
+    - match: <if expr="False">
+      scope: keyword.control.preprocessor.disabled
+      push:
+      - clear_scopes: true
+      - meta_content_scope: comment.block.preprocessor.disabled
+      - include: nested-within-disabled-preprocessor-block
+      - match: </if>
+        scope: keyword.control.preprocessor.disabled
+        pop: true
+
+  nested-within-disabled-preprocessor-block:
+    - match: <if[^>]*>
+      push:
+        - include: nested-within-disabled-preprocessor-block
+        - match: </if>
+          pop: true
+
+  enabled-preprocessor-block:
+    - match: <if[^>]*>
+      scope: keyword.control.preprocessor
+    - match: </if>
+      scope: keyword.control.preprocessor

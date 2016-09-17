@@ -1,0 +1,91 @@
+## SYNTAX TEST "Packages/HTMLPlusGritSyntax/HTML-grit.sublime-syntax"
+## <- text.html.basic.grit
+
+## Disabled block:
+
+<html>
+<if expr="False">
+## <- keyword.control.preprocessor.disabled
+  <span>test</span>
+  ## <- comment.block
+</if>
+## <- keyword.control.preprocessor
+  <span>test</span>
+  ## <- meta.tag.inline
+
+## Enabled block:
+
+<if expr="is_win">
+## <- keyword.control.preprocessor
+  <span>test</span>
+  ## <- meta.tag.inline
+</if>
+## <- keyword.control.preprocessor
+  <span>test</span>
+  ## <- meta.tag.inline
+
+## Disabled block nested inside enabled:
+
+<if expr="is_win">
+## <- keyword.control.preprocessor
+  <span>test</span>
+  ## <- meta.tag.inline
+<if expr="False">
+## <- keyword.control.preprocessor.disabled
+  <span>test</span>
+  ## <- comment.block
+</if>
+## <- keyword.control.preprocessor
+  <span>test</span>
+  ## <- meta.tag.inline
+</if>
+## <- keyword.control.preprocessor
+  <span>test</span>
+  ## <- meta.tag.inline
+
+## Enabled block nested inside disabled:
+
+<if expr="False">
+## <- keyword.control.preprocessor.disabled
+  <span>test</span>
+  ## <- comment.block
+<if expr="is_mac">
+## <- comment.block
+  <span>test</span>
+  ## <- comment.block
+</if>
+## <- comment.block
+  <span>test</span>
+  ## <- comment.block
+</if>
+## <- keyword.control.preprocessor
+  <span>test</span>
+  ## <- meta.tag.inline
+
+## Triple-nested block:
+
+<if expr="False">
+## <- keyword.control.preprocessor
+<if expr="is_mac">
+## <- comment.block
+<if expr="is_mac">
+## <- comment.block
+</if>
+## <- comment.block
+</if>
+## <- comment.block
+</if>
+## <- keyword.control.preprocessor
+
+## Disabled block html block:
+
+<div>
+## <- meta.tag.block
+<if expr="False">
+## <- keyword.control.preprocessor.disabled
+</if>
+## <- keyword.control.preprocessor.disabled
+  <span>test</span>
+  ## <- meta.tag.inline
+</div>
+## <- meta.tag.block
